@@ -13,7 +13,8 @@ const rightArtist = $("#right-artist");
 
 let albums = []; 
 let curIndex = 0;
-let chooseIndex = 2;
+let chooseIndex = 0;
+
 
 // Event listeners
 leftChoose.on("click", () => {
@@ -27,24 +28,50 @@ rightChoose.on("click", () => {
 $(document).ready(function(){  
     addAlbumMargins();
      getTopAlbums().then(function(topAlbums){
-        setup(topAlbums);
+        // Initial setup
+        albums = topAlbums.topalbums["album"];
+        placeAlbumImages(topAlbums);
+        setChoosingVisuals();
     }).catch(function(error) {
         console.log(error);
     });  
 })
 
-// Initial setup
-function setup(topAlbums){
-    albums = topAlbums.topalbums["album"];
-    placeAlbumImages(topAlbums);
-    $(leftLabel).html(albums[0].name);
-    $(rightLabel).html(albums[1].name);
-    $(leftArtist).html(albums[0].artist["name"]);
-    $(rightArtist).html(albums[1].artist["name"]);
+// Set artist and album name labels 
+function setLabels(){
+    if(chooseIndex < 16){
+        $(leftLabel).html(albums[chooseIndex].name)
+        $(rightLabel).html(albums[chooseIndex+1].name)
+        $(leftArtist).html(albums[chooseIndex].artist["name"])
+        $(rightArtist).html(albums[chooseIndex+1].artist["name"])
+    }else{
+        //FIXME
+    }
 }
 
-function setLabels(){
-    
+// set album images in choose section
+function setChooseAlbums(){
+    let newAlbum1;
+    let newAlbum2;
+
+    if(chooseIndex < 16){
+        newAlbum1 = albums[chooseIndex].image[2]["#text"]
+        newAlbum2 = albums[chooseIndex+1].image[2]["#text"]
+
+    }else{
+        newAlbum1 = $(albumColums[chooseIndex - 16]).attr('src')
+        newAlbum2 = $(albumColums[chooseIndex - 15]).attr('src')
+    }
+
+    $(chooseAlbums[0]).attr("src", newAlbum1);
+    $(chooseAlbums[1]).attr("src", newAlbum2);
+}
+
+// Set visuals related to choosing section
+function setChoosingVisuals(){
+    setLabels();
+    setChooseAlbums();
+    chooseIndex +=2;
 }
 
 // Add extra spacing to albums
@@ -73,13 +100,11 @@ function getTopAlbums(user="lukaschou", period = "overall", limit="16", apiKey="
     }) 
 }
 
-// Place initial album images 
+// Place initial album images in left and right rows
 function placeAlbumImages(topAlbums){
     for(let i=0; i < albumElements.length; i++){
         $(albumElements[i]).attr("src", topAlbums.topalbums["album"][i].image[1]["#text"]);
     }
-    $(chooseAlbums[0]).attr("src", albums[0].image[2]["#text"])
-    $(chooseAlbums[1]).attr("src", albums[1].image[2]["#text"])
 }
 
 // Handle choosing
@@ -92,29 +117,8 @@ function choose(direction) {
         $(albumColums[curIndex]).attr("src", $(chooseAlbums[1]).attr("src"));
     }
 
+    setChoosingVisuals();
     curIndex++;
-
-    let newAlbum1;
-    let newAlbum2;
-
-    if(chooseIndex < 16){
-        newAlbum1 = albums[chooseIndex].image[2]["#text"]
-        newAlbum2 = albums[chooseIndex+1].image[2]["#text"]
-        $(leftLabel).html(albums[chooseIndex].name)
-        $(rightLabel).html(albums[chooseIndex+1].name)
-        $(leftArtist).html(albums[chooseIndex].artist["name"])
-        $(rightArtist).html(albums[chooseIndex+1].artist["name"])
-    }else{
-        newAlbum1 = $(albumColums[chooseIndex - 16]).attr('src')
-        newAlbum2 = $(albumColums[chooseIndex - 15]).attr('src')
-    }
-
-
-    $(chooseAlbums[0]).attr("src", newAlbum1);
-    $(chooseAlbums[1]).attr("src", newAlbum2);
-
-    chooseIndex += 2;
-
 }
 
 
