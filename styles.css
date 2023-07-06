@@ -2,6 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Roboto Mono', monospace;
 }
 
 html,
@@ -31,8 +32,20 @@ body {
 .leftside2, 
 .rightside2, 
 .leftside3, 
-.rightside3 {
+.rightside3,
+.leftside4,
+.rightside4 {
     margin-left: auto;
+}
+
+#left-label,
+#right-label{
+    font-size: small;
+}
+
+#left-artist,
+#right-artist{
+    font-size: .7rem;
 }
 
 
@@ -50,12 +63,13 @@ body {
     flex-direction: row;
     margin-left: auto;
     align-items: center;
+    text-align: center;
 }
 
 .main-album{
     margin-left: 2%;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     cursor: pointer;
 }
 
