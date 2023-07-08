@@ -14,6 +14,8 @@ const rightArtist = $("#right-artist");
 let albums = []; 
 let curIndex = 0;
 let chooseIndex = 0;
+let albumColumnData = [];
+let columnIndex = 0;
 
 
 // Event listeners
@@ -55,16 +57,17 @@ function setChooseAlbums(){
     let newAlbum2;
 
     if(chooseIndex < 16){
-        newAlbum1 = albums[chooseIndex].image[2]["#text"]
-        newAlbum2 = albums[chooseIndex+1].image[2]["#text"]
-
+        newAlbum1 = albums[chooseIndex];
+        newAlbum2 = albums[chooseIndex+1];
+        albumColumnData.push(newAlbum1);
+        albumColumnData.push(newAlbum2);
     }else{
-        newAlbum1 = $(albumColums[chooseIndex - 16]).attr('src')
-        newAlbum2 = $(albumColums[chooseIndex - 15]).attr('src')
+        newAlbum1 = albumColumnData[chooseIndex-16];
+        newAlbum2 = albumColumnData[chooseIndex-15];
     }
 
-    $(chooseAlbums[0]).attr("src", newAlbum1);
-    $(chooseAlbums[1]).attr("src", newAlbum2);
+    $(chooseAlbums[0]).attr("src", newAlbum1.image[2]["#text"]);
+    $(chooseAlbums[1]).attr("src", newAlbum2.image[2]["#text"]);
 }
 
 // Set visuals related to choosing section
@@ -109,6 +112,8 @@ function placeAlbumImages(topAlbums){
 
 // Handle choosing
 function choose(direction) {
+    console.log(curIndex)
+    console.log(albumColumnData)
 
     if(direction === "left"){
         $(albumColums[curIndex]).attr("src", $(chooseAlbums[0]).attr("src"));
@@ -117,6 +122,7 @@ function choose(direction) {
         $(albumColums[curIndex]).attr("src", $(chooseAlbums[1]).attr("src"));
     }
 
+    
     setChoosingVisuals();
     curIndex++;
 }
