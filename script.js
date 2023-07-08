@@ -11,9 +11,15 @@ const rightLabel = $("#right-label");
 const leftArtist = $("#left-artist");
 const rightArtist = $("#right-artist");
 
-let albums = []; 
+
+let index = 0;
 let curIndex = 0;
 let chooseIndex = 0;
+
+let albums = []; 
+let options = [];
+let columnAlbums = [];
+
 
 // Event listeners
 leftChoose.on("click", () => {
@@ -29,12 +35,31 @@ $(document).ready(function(){
      getTopAlbums().then(function(topAlbums){
         // Initial setup
         albums = topAlbums.topalbums["album"];
+        setup();
         placeAlbumImages(topAlbums);
         setChoosingVisuals();
     }).catch(function(error) {
         console.log(error);
     });  
 })
+
+function setup(){
+    shuffleAlbums();
+}
+
+function shuffleAlbums(){
+    let currentIndex = albums.length,  randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [albums[currentIndex], albums[randomIndex]] = [
+        albums[randomIndex], albums[currentIndex]];
+    }
+  
+    return albums;
+}
 
 // Set artist and album name labels 
 function setLabels(){
@@ -44,7 +69,10 @@ function setLabels(){
         $(leftArtist).html(albums[chooseIndex].artist["name"])
         $(rightArtist).html(albums[chooseIndex+1].artist["name"])
     }else{
-        //FIXME
+        $(leftLabel).html(columnAlbums[index].name)
+        $(rightLabel).html(columnAlbums[index+1].name)
+        $(leftArtist).html(columnAlbums[index].artist["name"])
+        $(rightArtist).html(columnAlbums[index+1].artist["name"])
     }
 }
 
@@ -56,13 +84,26 @@ function setChooseAlbums(){
     if(chooseIndex < 16){
         newAlbum1 = albums[chooseIndex];
         newAlbum2 = albums[chooseIndex+1];
+        options.push(newAlbum1);
+        options.push(newAlbum2);
     }else{
-        newAlbum1 = choosenAlbums[chooseIndex];
-        newAlbum2 = choosenAlbums[chooseIndex];
+        newAlbum1 = columnAlbums[index];
+        newAlbum2 = columnAlbums[index+1];
+        options.push(newAlbum1);
+        options.push(newAlbum2);
     }
 
-    $(chooseAlbums[0]).attr("src", newAlbum1.image[2]["#text"]);
-    $(chooseAlbums[1]).attr("src", newAlbum2.image[2]["#text"]);
+    const image1 = new Image();
+    image1.onload = function() {
+        $(chooseAlbums[0]).attr("src", newAlbum1.image[2]["#text"]);
+    };
+    image1.src = newAlbum1.image[2]["#text"];
+
+    const image2 = new Image();
+    image2.onload = function() {
+        $(chooseAlbums[1]).attr("src", newAlbum2.image[2]["#text"]);
+    };
+    image2.src = newAlbum2.image[2]["#text"];
 }
 
 // Set visuals related to choosing section
@@ -70,6 +111,9 @@ function setChoosingVisuals(){
     setLabels();
     setChooseAlbums();
     chooseIndex +=2;
+    if(chooseIndex > 16){
+        index +=2;
+    }
 }
 
 // Add extra spacing to albums
@@ -108,16 +152,43 @@ function placeAlbumImages(topAlbums){
 // Handle choosing
 function choose(direction) {
 
+    if(index < 14){
+        if(direction === "left"){
+            $(albumColums[curIndex]).attr("src", $(chooseAlbums[0]).attr("src"));
+            columnAlbums.push(options[0]);
+        }
+        else if(direction === "right"){
+            $(albumColums[curIndex]).attr("src", $(chooseAlbums[1]).attr("src"));
+            columnAlbums.push(options[1]);
+        }
+    
+        options = [];
+    
+        setChoosingVisuals();
+        curIndex++;
+    }
+    else{
+        winning(direction);
+    }
+}
+
+function winning(direction){
+    let winner;
+
     if(direction === "left"){
-        $(albumColums[curIndex]).attr("src", $(chooseAlbums[0]).attr("src"));
+        winner = options[0]
+        $(rightChoose).remove();
     }
     else if(direction === "right"){
-        $(albumColums[curIndex]).attr("src", $(chooseAlbums[1]).attr("src"));
+        winner = options[1]
+        $(leftChoose).remove();
     }
-
-    
-    setChoosingVisuals();
-    curIndex++;
 }
+
+
+
+
+
+
 
 
