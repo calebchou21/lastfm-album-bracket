@@ -14,9 +14,6 @@ const rightArtist = $("#right-artist");
 let albums = []; 
 let curIndex = 0;
 let chooseIndex = 0;
-let albumColumnData = [];
-let columnIndex = 0;
-
 
 // Event listeners
 leftChoose.on("click", () => {
@@ -59,11 +56,9 @@ function setChooseAlbums(){
     if(chooseIndex < 16){
         newAlbum1 = albums[chooseIndex];
         newAlbum2 = albums[chooseIndex+1];
-        albumColumnData.push(newAlbum1);
-        albumColumnData.push(newAlbum2);
     }else{
-        newAlbum1 = albumColumnData[chooseIndex-16];
-        newAlbum2 = albumColumnData[chooseIndex-15];
+        newAlbum1 = choosenAlbums[chooseIndex];
+        newAlbum2 = choosenAlbums[chooseIndex];
     }
 
     $(chooseAlbums[0]).attr("src", newAlbum1.image[2]["#text"]);
@@ -112,8 +107,6 @@ function placeAlbumImages(topAlbums){
 
 // Handle choosing
 function choose(direction) {
-    console.log(curIndex)
-    console.log(albumColumnData)
 
     if(direction === "left"){
         $(albumColums[curIndex]).attr("src", $(chooseAlbums[0]).attr("src"));
