@@ -10,6 +10,8 @@ const leftLabel = $("#left-label");
 const rightLabel = $("#right-label");
 const leftArtist = $("#left-artist");
 const rightArtist = $("#right-artist");
+const resetButton = $("#reset-button")
+const bracket = $(".bracket");
 
 let index = 0;
 let curIndex = 0;
@@ -27,6 +29,9 @@ leftChoose.on("click", () => {
 rightChoose.on("click", () => {
     choose("right")
 });
+resetButton.on("click", () => {
+    reset();
+});
 
 // Load data on ready
 $(document).ready(function(){  
@@ -42,6 +47,17 @@ $(document).ready(function(){
         console.log(error);
     });  
 })
+
+//reset
+function reset() {
+    index = 0;
+    curIndex = 0;
+    chooseIndex = 0;   
+    albums = []; 
+    options = [];
+    columnAlbums = [];
+    $(bracket).remove();
+}
 
 function setup(){
     shuffleAlbums();
@@ -196,7 +212,7 @@ function winning(direction){
 
 /*
 -Hide API key; DONE
--SYNC UP loading (labels and imgs);
+-SYNC UP loading (labels and imgs); DONE
 -RESET button
     -reset function
 
