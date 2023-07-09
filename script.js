@@ -11,7 +11,6 @@ const rightLabel = $("#right-label");
 const leftArtist = $("#left-artist");
 const rightArtist = $("#right-artist");
 
-
 let index = 0;
 let curIndex = 0;
 let chooseIndex = 0;
@@ -31,6 +30,7 @@ rightChoose.on("click", () => {
 
 // Load data on ready
 $(document).ready(function(){  
+    console.log(apiKey);
     addAlbumMargins();
      getTopAlbums().then(function(topAlbums){
         // Initial setup
@@ -125,10 +125,10 @@ function addAlbumMargins(){
 }
 
 // Retrieve data via lastfm API
-function getTopAlbums(user="lukaschou", period = "overall", limit="16", apiKey="f8a5d3891863166d8eedf981ab16d679"){
+function getTopAlbums(user="lukaschou", period = "7day", limit="30", key = apiKey){
     return new Promise(function(resolve, reject){
         $.ajax({
-            url: endpoint + "?method=user.gettopalbums" + `&api_key=${apiKey}` + `&user=${user}` + `&period=${period}`
+            url: endpoint + "?method=user.gettopalbums" + `&api_key=${key}` + `&user=${user}` + `&period=${period}`
                 + `&limit=${limit}` + `&format=json`,
             contentType: "application/json",
             dataType: 'json',
@@ -185,10 +185,15 @@ function winning(direction){
     }
 }
 
+/*
+-Hide API key
+-SYNC UP loading
+-RESET button
+    -reset function
 
+-FORM at start for user info (iFrame?)
+    -username, album limit(16-100), period, api key (optional), randomization
 
-
-
-
-
-
+-CSS (animations)
+-Clean up code
+*/
