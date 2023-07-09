@@ -37,7 +37,7 @@ $(document).ready(function(){
         albums = topAlbums.topalbums["album"];
         setup();
         placeAlbumImages(topAlbums);
-        setChoosingVisuals();
+        setChooseAlbums();
     }).catch(function(error) {
         console.log(error);
     });  
@@ -93,27 +93,36 @@ function setChooseAlbums(){
         options.push(newAlbum2);
     }
 
-    const image1 = new Image();
-    image1.onload = function() {
+    // Create promises for each image loading process
+    const image1Promise = new Promise((resolve) => {
+        const image1 = new Image();
+        image1.onload = function() {
+        resolve();
+        };
+        image1.src = newAlbum1.image[2]["#text"];
+    });
+  
+    const image2Promise = new Promise((resolve) => {
+        const image2 = new Image();
+        image2.onload = function() {
+        resolve();
+        };
+        image2.src = newAlbum2.image[2]["#text"];
+    });
+  
+    // Wait for both promises to resolve
+    Promise.all([image1Promise, image2Promise]).then(() => {
+        // Both images have finished loading
         $(chooseAlbums[0]).attr("src", newAlbum1.image[2]["#text"]);
-    };
-    image1.src = newAlbum1.image[2]["#text"];
-
-    const image2 = new Image();
-    image2.onload = function() {
         $(chooseAlbums[1]).attr("src", newAlbum2.image[2]["#text"]);
-    };
-    image2.src = newAlbum2.image[2]["#text"];
-}
-
-// Set visuals related to choosing section
-function setChoosingVisuals(){
-    setLabels();
-    setChooseAlbums();
-    chooseIndex +=2;
-    if(chooseIndex > 16){
-        index +=2;
-    }
+        // Set the image labels only after they laod
+        setLabels();
+        // increment necessary indices for other functions
+        chooseIndex += 2;
+        if (chooseIndex > 16) {
+            index += 2;
+        }
+  });
 }
 
 // Add extra spacing to albums
@@ -125,7 +134,7 @@ function addAlbumMargins(){
 }
 
 // Retrieve data via lastfm API
-function getTopAlbums(user="lukaschou", period = "overall", limit="16", apiKey="f8a5d3891863166d8eedf981ab16d679"){
+function getTopAlbums(user="gamingrocks69", period = "overall", limit="100", apiKey="f8a5d3891863166d8eedf981ab16d679"){
     return new Promise(function(resolve, reject){
         $.ajax({
             url: endpoint + "?method=user.gettopalbums" + `&api_key=${apiKey}` + `&user=${user}` + `&period=${period}`
@@ -164,7 +173,7 @@ function choose(direction) {
     
         options = [];
     
-        setChoosingVisuals();
+        setChooseAlbums();
         curIndex++;
     }
     else{
