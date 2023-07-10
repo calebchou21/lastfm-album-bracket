@@ -14,11 +14,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form>
+    <form id="intro-form">
         <label for="username">Username</label><br>
-        <input type="text" id="username" name="username"><br>
+        <input type="text" placeholder="username" id="username" name="username"><br>
         <label for="limit"></label>Limit<br>
-        <input type="number" min="16" max="100" id="limit" name="limit"><br>  
+        <input type="number" placeholder="16-100" min="16" max="100" id="limit" name="limit"><br>  
         <label for="period">Period</label><br>
         <select id="period" name="period">
             <option value="overall">Overall</option>
@@ -28,8 +28,11 @@
             <option value="6month">6 Months</option>
             <option value="12month">Year</option>
         </select><br>
-        <label for="randomize">Randomize albums?</label>
-        <input type="checkbox" id="randomize" name="randomize"><br>
+        <label for="randomize" class="container">Randomize albums?
+            <input type="checkbox" id="randomize" name="randomize">
+            <span class="checkmark"></span>
+        </label>
+        <button id="submit">Submit</button>
     </form>
     <!-- <div class="bracket">
         <div class="album-flex-container">

@@ -112,3 +112,131 @@ img{
 #reset-button:active {
     opacity: .5;
 }
+
+#username {
+    width: 200px;
+}
+
+#limit {
+    width: 100px;
+}
+
+#username,
+#limit,
+#period {
+    height: 30px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    padding: 5px;
+    border: solid rgba(0, 0, 0, 0.351);
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+    margin: 0;
+}
+
+form {
+    background-color: #DDD6F3;
+    padding: 5vw;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.5);
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-right: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  
+.container input {
+    display: none;
+}
+  
+.checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    border: solid rgb(41, 40, 40);
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #bab6b6;
+    cursor: pointer;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #746f6f;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 7px;
+    top: 2px;
+    width: 5px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#submit {
+    display: flex;
+    justify-content: center; /*fix*/
+    margin-left: 35%; /*fix*/
+    margin-top: 35px;
+    width: 75px;
+    height: 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: solid rgba(0, 0, 0, 0.351);
+    background-color: #ffd9d9bd;
+    transition: box-shadow 0.3s
+}
+
+#submit:hover {
+    cursor: pointer;
+    background-color: #f9cccce3;
+}
+
+#submit:active {
+    cursor: pointer;
+    background-color: #f6b7b7e3;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+
+  
+

@@ -48,7 +48,7 @@ $(document).ready(function(){
     });  
 })
 
-//reset
+//reset to intro form
 function reset() {
     index = 0;
     curIndex = 0;
@@ -213,10 +213,10 @@ function winning(direction){
 /*
 -Hide API key; DONE
 -SYNC UP loading (labels and imgs); DONE
--RESET button
-    -reset function
+-RESET button; DONE
+    -reset function; in progress
 
--FORM at start for user info (iFrame?)
+-FORM at start for user info (iFrame? NO)
     -username, album limit(16-100), period, api key (optional), randomization
 
 -CSS (animations)
