@@ -21,6 +21,7 @@ let chooseIndex = 0;
 let albums = []; 
 let options = [];
 let columnAlbums = [];
+let canChoose = true;
 
 
 // Event listeners
@@ -109,6 +110,8 @@ function setChooseAlbums(){
     let newAlbum1;
     let newAlbum2;
 
+    canChoose = false;
+
     if(chooseIndex < 16){
         newAlbum1 = albums[chooseIndex];
         newAlbum2 = albums[chooseIndex+1];
@@ -143,6 +146,8 @@ function setChooseAlbums(){
         // Both images have finished loading
         $(chooseAlbums[0]).attr("src", newAlbum1.image[2]["#text"]);
         $(chooseAlbums[1]).attr("src", newAlbum2.image[2]["#text"]);
+        //allow choosing
+        canChoose = true;
         // Set the image labels only after they laod
         setLabels();
         // increment necessary indices for other functions
@@ -150,6 +155,7 @@ function setChooseAlbums(){
         if (chooseIndex > 16) {
             index += 2;
         }
+        
   });
 }
 
@@ -162,11 +168,7 @@ function addAlbumMargins(){
 }
 
 // Retrieve data via lastfm API
-<<<<<<< HEAD
-function getTopAlbums(user="gamingrocks69", period = "7day", limit="50", key = apiKey){
-=======
 function getTopAlbums(user="lukaschou", period = "overall", limit="20", key = apiKey){
->>>>>>> f965aa363b727f01099042cc3bddaf99cd700ea3
     return new Promise(function(resolve, reject){
         $.ajax({
             url: endpoint + "?method=user.gettopalbums" + `&api_key=${key}` + `&user=${user}` + `&period=${period}`
@@ -192,24 +194,25 @@ function placeAlbumImages(topAlbums){
 
 // Handle choosing
 function choose(direction) {
-
-    if(index < 14){
-        if(direction === "left"){
-            $(albumColums[curIndex]).attr("src", $(chooseAlbums[0]).attr("src"));
-            columnAlbums.push(options[0]);
+    if(canChoose){
+        if(index < 14){
+            if(direction === "left"){
+                $(albumColums[curIndex]).attr("src", $(chooseAlbums[0]).attr("src"));
+                columnAlbums.push(options[0]);
+            }
+            else if(direction === "right"){
+                $(albumColums[curIndex]).attr("src", $(chooseAlbums[1]).attr("src"));
+                columnAlbums.push(options[1]);
+            }
+        
+            options = [];
+        
+            setChooseAlbums();
+            curIndex++;
         }
-        else if(direction === "right"){
-            $(albumColums[curIndex]).attr("src", $(chooseAlbums[1]).attr("src"));
-            columnAlbums.push(options[1]);
+        else{
+            winning(direction);
         }
-    
-        options = [];
-    
-        setChooseAlbums();
-        curIndex++;
-    }
-    else{
-        winning(direction);
     }
 }
 
