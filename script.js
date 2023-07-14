@@ -54,6 +54,9 @@ function loadBracket(){
 
 //reset to intro form
 function reset() {
+    $("img").each(function() {
+        $(this).attr("src", "");
+    });
     index = 0;
     curIndex = 0;
     chooseIndex = 0;   
@@ -231,4 +234,8 @@ function winning(direction){
 
 -CSS (animations)
 -Clean up code
+
+- form error message css
+- remove randomize button? 
+
 */
