@@ -35,7 +35,6 @@ resetButton.on("click", () => {
 
 // Load data on ready
 $(document).ready(function(){  
-    console.log(apiKey);
     addAlbumMargins();
      getTopAlbums().then(function(topAlbums){
         // Initial setup
@@ -209,6 +208,7 @@ function winning(direction){
         $(leftChoose).remove();
     }
 }
+
 
 /*
 -Hide API key; DONE
