@@ -13,6 +13,7 @@ const rightArtist = $("#right-artist");
 const resetButton = $("#reset-button")
 const bracket = $(".bracket");
 
+let detachedBracket;
 let index = 0;
 let curIndex = 0;
 let chooseIndex = 0;
@@ -35,8 +36,12 @@ resetButton.on("click", () => {
 
 // Load data on ready
 $(document).ready(function(){  
+    reset();
+})
+
+function loadBracket(){
     addAlbumMargins();
-     getTopAlbums().then(function(topAlbums){
+    getTopAlbums(username, period, limit, key = apiKey).then(function(topAlbums){
         // Initial setup
         albums = topAlbums.topalbums["album"];
         setup();
@@ -44,8 +49,8 @@ $(document).ready(function(){
         setChooseAlbums();
     }).catch(function(error) {
         console.log(error);
-    });  
-})
+    });
+}
 
 //reset to intro form
 function reset() {
@@ -55,14 +60,19 @@ function reset() {
     albums = []; 
     options = [];
     columnAlbums = [];
-    $(bracket).remove();
+    detachedBracket = bracket.detach();
+    detachedForm.appendTo("body");
 }
 
 function setup(){
-    shuffleAlbums();
+    if(randomize){
+        shuffleAlbums();
+    } 
 }
 
 function shuffleAlbums(){
+    console.log(randomize);
+
     let currentIndex = albums.length,  randomIndex;
 
     while (currentIndex != 0) {
@@ -149,7 +159,7 @@ function addAlbumMargins(){
 }
 
 // Retrieve data via lastfm API
-function getTopAlbums(user="lukaschou", period = "7day", limit="16", key = apiKey){
+function getTopAlbums(user="lukaschou", period = "overall", limit="20", key = apiKey){
     return new Promise(function(resolve, reject){
         $.ajax({
             url: endpoint + "?method=user.gettopalbums" + `&api_key=${key}` + `&user=${user}` + `&period=${period}`

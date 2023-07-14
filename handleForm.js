@@ -2,7 +2,15 @@ const submitBtn = $("#submit");
 const usernameElement = $("#username");
 const limitElement = $("#limit");
 const periodElement = $("#period");
-const randomizeElement = $("#randomize");
+const formElement = $("#intro-form");
+const randomizeElement = document.getElementById("randomize");
+
+let detachedForm;
+let formData = {};
+let username = "";
+let limit = 16;
+let period = "overall";
+let randomize = randomizeElement.checked;
 
 submitBtn.click(function(event) {
     event.preventDefault();
@@ -10,7 +18,17 @@ submitBtn.click(function(event) {
   });
 
 function validateForm(){
-    
+    if(checkUsername() && checkLimit()){
+        period = periodElement.val();
+        randomize = randomizeElement.checked;
+        startBracket();
+    }
+}
+
+function startBracket(){
+    detachedForm = formElement.detach();
+    detachedBracket.appendTo("body");
+    loadBracket();
 }
 
 function checkUsername(){
@@ -19,6 +37,7 @@ function checkUsername(){
         return false;
     }
     else{
+        username = usernameElement.val();
         removeError(usernameElement);
         return true;
     }
@@ -31,6 +50,7 @@ function checkLimit(){
         return false;
     }
     else{
+        limit = limitVal;
         removeError(limitElement);
         return true;
     }
