@@ -237,18 +237,15 @@ input[type="checkbox"] {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-<<<<<<< HEAD
 #intro-title {
     text-align: center;
     margin-bottom: 20px;
     padding: 0;
 }
-=======
 .error{
     background-color: red;
 }
 
->>>>>>> f965aa363b727f01099042cc3bddaf99cd700ea3
 
 /*TODO
 fuck with the dropdown menu on select tag

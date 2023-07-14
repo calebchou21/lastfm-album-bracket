@@ -159,11 +159,7 @@ function addAlbumMargins(){
 }
 
 // Retrieve data via lastfm API
-<<<<<<< HEAD
 function getTopAlbums(user="gamingrocks69", period = "7day", limit="50", key = apiKey){
-=======
-function getTopAlbums(user="lukaschou", period = "overall", limit="20", key = apiKey){
->>>>>>> f965aa363b727f01099042cc3bddaf99cd700ea3
     return new Promise(function(resolve, reject){
         $.ajax({
             url: endpoint + "?method=user.gettopalbums" + `&api_key=${key}` + `&user=${user}` + `&period=${period}`
@@ -230,7 +226,8 @@ function winning(direction){
 -RESET button; DONE
     -reset function; in progress
 
--FORM at start for user info (iFrame? NO)
+-FORM at start for user info
+
     -username, album limit(16-100), period, api key (optional), randomization
 
 -CSS (animations)
