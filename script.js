@@ -75,9 +75,7 @@ function reset() {
 }
 
 function setup(){
-    if(randomize){
-        shuffleAlbums();
-    } 
+    shuffleAlbums();
 }
 
 function shuffleAlbums(){
