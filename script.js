@@ -224,11 +224,11 @@ function winning(direction){
     let winner;
 
     if(direction === "left"){
-        winner = options[0]
+        winner = options[0];
         removed = $(rightChoose).detach();
     }
     else if(direction === "right"){
-        winner = options[1]
+        winner = options[1];
         removed = $(leftChoose).detach();
     }
 }
@@ -245,23 +245,3 @@ function reattachElements(direction) {
     $(leftChoose).find("span").empty(); 
     $(rightChoose).find("span").empty(); 
 }
-
-
-
-/*
--Hide API key; DONE
--SYNC UP loading (labels and imgs); DONE
--RESET button; DONE
-    -reset function; in progress
-
--FORM at start for user info
-
-    -username, album limit(16-100), period, api key (optional), randomization
-
--CSS (animations)
--Clean up code
-
-- form error message css
-- remove randomize button? 
-
-*/

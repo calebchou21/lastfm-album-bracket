@@ -148,10 +148,15 @@ input[type="number"]::-webkit-inner-spin-button {
     box-shadow: 0 15px 25px rgba(0,0,0,.5);
 }
 
+#intro-title {
+    font-weight: bold;
+}
+
 #submit {
     display: flex;
-    justify-content: center; /*fix*/
-    margin-left: 35%; /*fix*/
+    justify-content: center;
+    align-items: center;
+    margin-left: 35%;
     margin-top: 35px;
     width: 75px;
     height: 30px;
@@ -178,8 +183,14 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-bottom: 20px;
     padding: 0;
 }
+
 .error{
     background-color: red;
+}
+
+#button-container {
+    border-bottom: solid rgba(59, 58, 58, 0.4);
+    width: 100%
 }
 
 
