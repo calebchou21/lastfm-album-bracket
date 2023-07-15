@@ -1,7 +1,7 @@
 const endpoint = "http://ws.audioscrobbler.com/2.0/";
+const chooseAlbums = $(".main-album img");
 const leftChoose = $("#left-choose");
 const rightChoose = $("#right-choose");
-const chooseAlbums = $(".main-album img");
 const albumColums = Array.from($(".leftside2 .album img").add($(".rightside2 .album img")))
     .concat(Array.from($(".leftside3 .album img").add($(".rightside3 .album img"))))
     .concat(Array.from($(".leftside4 .album img").add($(".rightside4 .album img"))));
@@ -23,13 +23,17 @@ let options = [];
 let columnAlbums = [];
 let canChoose = true;
 
+let direction;
+let removed
 
 // Event listeners
 leftChoose.on("click", () => {
-    choose("left")
+    direction = "left"
+    choose(direction)
 });
 rightChoose.on("click", () => {
-    choose("right")
+    direction = "right"
+    choose(direction)
 });
 resetButton.on("click", () => {
     reset();
@@ -55,6 +59,8 @@ function loadBracket(){
 
 //reset to intro form
 function reset() {
+    reattachElements(direction);
+    direction = "";
     $(albumColums).each(function() {
         $(this).attr("src", "");
     });
@@ -75,7 +81,7 @@ function setup(){
 }
 
 function shuffleAlbums(){
-    console.log(randomize);
+    //console.log(randomize);
 
     let currentIndex = albums.length,  randomIndex;
 
@@ -221,13 +227,27 @@ function winning(direction){
 
     if(direction === "left"){
         winner = options[0]
-        $(rightChoose).remove();
+        removed = $(rightChoose).detach();
     }
     else if(direction === "right"){
         winner = options[1]
-        $(leftChoose).remove();
+        removed = $(leftChoose).detach();
     }
 }
+
+function reattachElements(direction) {
+    // Determine the appropriate location for reattaching the elements
+    if (direction === "left") {
+        $(".right-choose-container").empty().append(removed);
+    } else if (direction === "right") {
+        $(".left-choose-container").empty().append(removed);
+    }
+    $(leftChoose).find("img").attr("src", ""); 
+    $(rightChoose).find("img").attr("src", ""); 
+    $(leftChoose).find("span").empty(); 
+    $(rightChoose).find("span").empty(); 
+}
+
 
 
 /*
