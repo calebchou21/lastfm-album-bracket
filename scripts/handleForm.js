@@ -3,12 +3,14 @@ const usernameElement = $("#username");
 const limitElement = $("#limit");
 const periodElement = $("#period");
 const formElement = $("#intro-form");
+const apiKeyElement = $("#api-key");
 
 let detachedForm;
 let formData = {};
 let username = "";
 let limit = 16;
 let period = "overall";
+let key = apiKey;
 
 submitBtn.click(function(event) {
     event.preventDefault();
@@ -18,6 +20,7 @@ submitBtn.click(function(event) {
 function validateForm(){
     if(checkUsername() && checkLimit()){
         period = periodElement.val();
+        key = (apiKeyElement.val() == "") ? apiKey : apiKeyElement.val();
         startBracket();
     }
 }

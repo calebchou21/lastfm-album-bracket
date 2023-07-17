@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 function loadBracket(){
     addAlbumMargins();
-    getTopAlbums(username, period, limit, key = apiKey).then(function(topAlbums){
+    getTopAlbums(username, period, limit, key).then(function(topAlbums){
         // Initial setup
         albums = topAlbums.topalbums["album"];
         setup();
@@ -172,7 +172,7 @@ function addAlbumMargins(){
 }
 
 // Retrieve data via lastfm API
-function getTopAlbums(user="lukaschou", period = "overall", limit="20", key = apiKey){
+function getTopAlbums(user="lukaschou", period = "overall", limit="20", key){
     return new Promise(function(resolve, reject){
         $.ajax({
             url: endpoint + "?method=user.gettopalbums" + `&api_key=${key}` + `&user=${user}` + `&period=${period}`

@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bracket.fm</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="config.js"></script>
-    <script defer src="handleForm.js"></script>
-    <script defer src="script.js"></script>
+    <script type="text/javascript" src="./scripts/config.js"></script>
+    <script defer src="./scripts/handleForm.js"></script>
+    <script defer src="./scripts/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +31,8 @@
                 <option value="6month">6 Months</option>
                 <option value="12month">Year</option>
             </select><br>
+            <label for="api-key">Api Key (optional)</label><br>
+            <input type="text" placeholder="API key" id="api-key" name="api-key">
         </div>
             <button id="submit">Submit</button>
     </div>
@@ -63,6 +65,7 @@
                 <div class="left-choose-container">
                     <div class="main-album" id="left-choose">
                         <img>
+                        <br>
                         <span id="left-label"></span>
                         <br>
                         <span id="left-artist"></span>
@@ -71,6 +74,7 @@
                 <div class="right-choose-container">
                     <div class="main-album" id="right-choose">
                         <img>
+                        <br>
                         <span id="right-label"></span>
                         <br>
                         <span id="right-artist"></span>
