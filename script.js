@@ -80,7 +80,6 @@ function setup(){
 
 function shuffleAlbums(){
     //console.log(randomize);
-
     let currentIndex = albums.length,  randomIndex;
 
     while (currentIndex != 0) {
@@ -245,3 +244,4 @@ function reattachElements(direction) {
     $(leftChoose).find("span").empty(); 
     $(rightChoose).find("span").empty(); 
 }
+

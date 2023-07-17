@@ -185,17 +185,10 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .error{
-    background-color: red;
+    background-color: rgb(238, 155, 155);
 }
 
 #button-container {
     border-bottom: solid rgba(59, 58, 58, 0.4);
     width: 100%
 }
-
-
-/*TODO
-fuck with the dropdown menu on select tag
-limit explainer
-remove autofill?
-*/
