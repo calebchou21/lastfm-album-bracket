@@ -23,18 +23,22 @@
             <label for="limit"></label>Limit<br>
             <input type="number" placeholder="16-100" min="16" max="100" id="limit" name="limit"><br>  
             <label for="period">Period</label><br>
-            <select id="period" name="period">
-                <option value="overall">Overall</option>
-                <option value="7day">Week</option>
-                <option value="1month">Month</option>
-                <option value="3month">3 Months</option>
-                <option value="6month">6 Months</option>
-                <option value="12month">Year</option>
-            </select><br>
+            <div class="custom-select">
+                <select id="period" name="period">
+                    <option value="overall">Overall</option>
+                    <option value="7day">Week</option>
+                    <option value="1month">Month</option>
+                    <option value="3month">3 Months</option>
+                    <option value="6month">6 Months</option>
+                    <option value="12month">Year</option>
+                </select><br>
+                <span class="custom-arrow"></span>
+            </div>
             <label for="api-key">Api Key (optional)</label><br>
             <input type="text" placeholder="API key" id="api-key" name="api-key">
         </div>
-            <button id="submit">Submit</button>
+            <button id="submit">Submit</button><br>
+            <button id="help">?</button>
     </div>
     <div class="bracket">
         <div class="album-flex-container">
