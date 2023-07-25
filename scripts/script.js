@@ -52,6 +52,12 @@ function loadBracket(){
         setup();
         placeAlbumImages(topAlbums);
         setChooseAlbums();
+        
+        if(albums.length < 16) {
+            reset();
+            alert("Not enough albums! Try using a longer period.")
+        }
+
     }).catch(function(error) {
         console.log(error);
     });
